@@ -61,6 +61,18 @@ class Experiment:
         while len(self.free_walkers) > 0:
             self.step()
 
+        t, counts = np.unique(self.times[1:],return_counts=True)
+
+        return (    (
+                        t*self.walkers.dt,
+                        np.array(counts,dtype=float)
+                    ),
+                    (
+                        np.array(self.times)*self.walkers.dt,
+                        np.array(self.links)
+                    )
+               )
+
 if __name__=="__main__":
     import matplotlib.pyplot as pl
 
