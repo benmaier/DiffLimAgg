@@ -22,6 +22,11 @@ exp = dla.Experiment(walkers,
 animate(exp)
 ```
 
+This generates sth like the following animation. Video compression kinda messed it up but somehow I like it.
+
+https://user-images.githubusercontent.com/10728380/204252790-652efe63-30d5-4fdf-911f-7627dfc69ff4.mp4
+
+
 ## Install
 
     pip install ./DiffLimAgg
