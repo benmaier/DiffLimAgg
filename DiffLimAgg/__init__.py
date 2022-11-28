@@ -13,3 +13,6 @@ from .metadata import (
         __email__,
         __status__,
     )
+
+from .walkers import Walkers2D
+from .experiment import Experiment

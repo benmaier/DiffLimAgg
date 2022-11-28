@@ -10,10 +10,11 @@ def animate(experiment):
 
     Lx = experiment.walkers.Lx
     Ly = experiment.walkers.Ly
-    fig, ax = pl.subplots(1,1,figsize=(8,12*Ly/Lx))
+    fig, ax = pl.subplots(1,1,figsize=(8,8*Ly/Lx))
     pl.axis('equal')
     if experiment.walkers.Lx == experiment.walkers.Ly:
         pl.axis('square')
+    pl.axis('off')
     ax.set_xlim(experiment.walkers.boxx)
     ax.set_ylim(experiment.walkers.boxy)
 
@@ -22,6 +23,7 @@ def animate(experiment):
 
     circles, = pl.plot(x,y,'.',ls='None',markersize=1)
     pl.plot(x,y,'.',ls='None',markersize=8,c='w')
+    fig.tight_layout()
 
     def anim(i):
         experiment.step()

@@ -1,24 +1,30 @@
-*Note: This is a dummy README for the package you want to build. For a README for the package builder, check out
-[PACKAGE_CREATION_README.md](https://github.com/benmaier/DiffLimAgg/blob/main/PACKAGE_CREATION_README.md)*
+# DiffLimAgg
 
-![logo](https://github.com/benmaier/DiffLimAgg/raw/main/img/Fig1.png)
-
-[![CircleCI](https://circleci.com/gh/benmaier/DiffLimAgg.svg?style=svg)](https://circleci.com/gh/benmaier/DiffLimAgg)
-
-Description of this package goes here.
-
-* repository: https://github.com/benmaier/DiffLimAgg/
-* documentation: http://DiffLimAgg.benmaier.org/
+Diffusion-limited aggregation in 2D. Simulate, analyze, visualize.
 
 ```python
-from DiffLimAgg.sqrt import get_sqrt_2
+import numpy as np
+import DiffLimAgg as dla
+from DiffLimAgg.anim import animate
 
-print(get_sqrt_2())
+walkers = dla.Walkers2D(N=50_000,
+                    dt=0.01,
+                    box=[0,1,0,1],
+                    initial_positions='random',
+                    position_noise_coefficient=0.0001,
+                    velocity_noise_coefficient=.0001,
+                    )
+
+exp = dla.Experiment(walkers,
+                     walker_radius=0.3*np.sqrt(1/50_000)
+                     )
+
+animate(exp)
 ```
 
 ## Install
 
-    pip install DiffLimAgg
+    pip install ./DiffLimAgg
 
 `DiffLimAgg` was developed and tested for 
 
@@ -32,50 +38,10 @@ So far, the package's functionality was tested on Mac OS X and CentOS only.
 
 `DiffLimAgg` directly depends on the following packages which will be installed by `pip` during the installation process
 
-* `numpy>=1.17`
-
-## Documentation
-
-The full documentation is available at [DiffLimAgg.benmaier.org](http://DiffLimAgg.benmaier.org).
-
-## Changelog
-
-Changes are logged in a [separate file](https://github.com/benmaier/DiffLimAgg/blob/main/CHANGELOG.md).
+* numpy>=1.20
+* scipy>=1.9
 
 ## License
 
 This project is licensed under the [MIT License](https://github.com/benmaier/DiffLimAgg/blob/main/LICENSE).
 Note that this excludes any images/pictures/figures shown here or in the documentation.
-
-## Contributing
-
-If you want to contribute to this project, please make sure to read the [code of conduct](https://github.com/benmaier/DiffLimAgg/blob/main/CODE_OF_CONDUCT.md) and the [contributing guidelines](https://github.com/benmaier/DiffLimAgg/blob/main/CONTRIBUTING.md). In case you're wondering about what to contribute, we're always collecting ideas of what we want to implement next in the [outlook notes](https://github.com/benmaier/DiffLimAgg/blob/main/OUTLOOK.md).
-
-[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v1.4%20adopted-ff69b4.svg)](code-of-conduct.md)
-
-## Dev notes
-
-Fork this repository, clone it, and install it in dev mode.
-
-```bash
-git clone git@github.com:YOURUSERNAME/DiffLimAgg.git
-make
-```
-
-If you want to upload to PyPI, first convert the new `README.md` to `README.rst`
-
-```bash
-make readme
-```
-
-It will give you warnings about bad `.rst`-syntax. Fix those errors in `README.rst`. Then wrap the whole thing 
-
-```bash
-make pypi
-```
-
-It will probably give you more warnings about `.rst`-syntax. Fix those until the warnings disappear. Then do
-
-```bash
-make upload
-```
