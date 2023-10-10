@@ -57,8 +57,18 @@ class Experiment:
             self.free_walkers = sorted(self.free_walkers)
             self.fixed_walkers = sorted(self.fixed_walkers)
 
-    def simulate(self):
+    def simulate(self,verbose=False):
+
+        if verbose:
+            from tqdm import tqdm
+            bar = tqdm(total=self.N)
+
+        free_walkers_before = len(self.free_walkers)
+
         while len(self.free_walkers) > 0:
+            if verbose and len(self.free_walkers) < free_walkers_before:
+                bar.update(free_walkers_before-len(self.free_walkers))
+            free_walkers_before = len(self.free_walkers)
             self.step()
 
         t, counts = np.unique(self.times[1:],return_counts=True)
